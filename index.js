@@ -1,7 +1,16 @@
-const {Board, Led} = require("johnny-five");
-const board = new Board();
+var express = require("express");
+var http = require("http");
 
-board.on("ready", () => {
-  const led = new Led(13);
-  led.blink(500);
+var app = express();
+
+app.use(function(request, response, next){
+  console.log("In comes a request to: " + request.url);
+  next();
 });
+
+app.use(function(request, response){
+  response.writeHead(200, {"Content-Type": "text/plain"});
+  response.end("Hello Worlds");
+});
+
+http.createServer(app).listen(3000);
