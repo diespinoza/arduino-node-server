@@ -18,6 +18,7 @@
   "homepage": "https://github.com/diespinoza/arduino-node-server#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "johnny-five": "^2.1.0"
+    "johnny-five": "^2.1.0",
+    "morgan": "^1.10.0"
   }
 }
