@@ -18,7 +18,7 @@ app.get("/about", function(request, response){
   response.end("Hello, about page!");
 });
 
-app.get("/yes", function(request, response){
+app.get("/testing", function(request, response){
   response.end("YESYESYES!");
 });
 
