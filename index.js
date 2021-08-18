@@ -5,8 +5,13 @@ var path = require("path");
 
 var app = express();
 
-var publicPath = path.resolve(__dirname, "public");
-app.use(express.static(publicPath));
+//Tells express that views will be in the folder called views
+app.set("views", path.resolve(__dirname, "views"));
+//Tells express that EJS will be the templating engine
+app.set("view engine", "ejs");
+
+//var publicPath = path.resolve(__dirname, "public");
+//app.use(express.static(publicPath));
 
 app.use(logger("short")); //"short" returns a function
 
@@ -15,7 +20,10 @@ app.get("/", function(request, response){
 });
 
 app.get("/about", function(request, response){
-  response.end("Hello, about page!");
+  response.render("client", {
+    message: "HELLO, this it my about PAGE!! :D"
+  });
+
 });
 
 app.get("/testing", function(request, response){
