@@ -2,6 +2,7 @@ var express = require("express");
 var http = require("http");
 var logger = require("morgan");
 var path = require("path");
+var MongoClient = require("mongodb").MongoClient
 
 var app = express();
 
