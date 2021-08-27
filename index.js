@@ -27,7 +27,7 @@ app.get("/about", function(request, response){
 
 });
 
-app.get("/testing", function(request, response){
+app.get("/neopixel", function(request, response){
   response.end("YESYESYES!");
 });
 
