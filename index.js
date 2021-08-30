@@ -20,7 +20,7 @@ app.get("/", function(request, response){
   response.end("Hello, this is the homepage!");
 });
 
-app.get("/about", function(request, response){
+app.get("/blynk", function(request, response){
   response.render("client", {
     message: "HELLO, this it my about PAGE!! :D"
   });
