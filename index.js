@@ -28,7 +28,7 @@ app.get("/blynk", function(request, response){
 });
 
 app.get("/neopixel", function(request, response){
-  response.end("YESYESYES!");
+  response.end("This is where you can add another strip of LEDs to controll");
 });
 
 app.use(function(request, response){
