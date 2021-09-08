@@ -22,7 +22,7 @@ app.get("/", function(request, response){
 
 app.get("/blynk", function(request, response){
   response.render("client", {
-    message: "This is where you can control the blynk program interface!! Change the color and lighting duration :D"
+    message: "This is where you can control the blynk program interface!! Change the color and lighting duration. Select RGB values :D"
   });
 
 });
