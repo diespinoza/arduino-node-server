@@ -27,6 +27,14 @@ app.get("/blynk", function(request, response){
 
 });
 
+app.post("/blynk/api", function(request, response){
+  response.render("client", {
+    message: "This is where the api request will come in"
+  });
+
+});
+
+
 app.get("/neopixel", function(request, response){
   response.end("This is where you can add another strip of LEDs to controll");
 });
