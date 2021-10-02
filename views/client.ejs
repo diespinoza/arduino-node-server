@@ -1,5 +1,16 @@
 <%- include('header') %>
 <h2>Create Neopixel Animations!!</h2>
+<h3>Select an animation</h3>
+
+<form action="/addAnimation" method="POST">
+  <select name="animation" id="animselect">
+    <option value="blink">Blink</option>
+    <option value="cylon">Cylon</option>
+  </select>
+  <label for="delay">Delay</label>
+  <input type="number" placeholder="(milliseconds)" name="delay">
+  <button type="submit">Submit</button>
+</form>
 
 <script type="text/javascript" src="js/main.js"></script>
 <%- include('footer') %>
