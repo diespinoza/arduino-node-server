@@ -3,12 +3,14 @@ var http = require("http");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
 var path = require("path");
-require('dotenv').config()
-//var MongoClient = require("mongodb").MongoClient
+var MongoClient = require("mongodb").MongoClient
 var app = express();
 
+require('dotenv').config()
 
+let db;
 let dbString = process.env.DB_STRING;
+let dbName = 'neopixel'
 
 app.set("views", path.resolve(__dirname, "views")); //views are in folder ./views
 app.set("view engine", "ejs"); //ejs is the templating engine
