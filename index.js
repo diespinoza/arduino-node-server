@@ -3,28 +3,32 @@ const http = require("http");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
 const path = require("path");
-const { MongoClient  } = require('mongodb');
-//const MongoClient = require("mongodb").MongoClient
+//const { MongoClient  } = require('mongodb');
+const MongoClient = require("mongodb").MongoClient
 const app = express();
 
 require('dotenv').config()
 
-
 let db;
-let dbString = process.env.DB_STRING;
-let dbName = 'neopixel'
+let dbConnectionStr = process.env.DB_STRING;
+let dbName = 'fastled-animations'
+
+
+MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
+  .then(client => {
+    console.log(`Connected to ${dbName} Database`)
+    db = client.db(dbName)
+  })
 
 /*
- const { MongoClient  } = require('mongodb');
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true  });
+const client = new MongoClient(dbConnectionStr, { useNewUrlParser: true, useUnifiedTopology: true  });
 client.connect(err => {
     const collection = client.db("test").collection("devices");
       // perform actions on the collection object
   //   client.close();
   //
 });
-
- */
+*/
 
 
 app.set("views", path.resolve(__dirname, "views")); //views are in folder ./views
