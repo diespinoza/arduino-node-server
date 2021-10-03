@@ -1,16 +1,31 @@
-var express = require("express");
-var http = require("http");
-var bodyParser = require("body-parser");
-var logger = require("morgan");
-var path = require("path");
-var MongoClient = require("mongodb").MongoClient
-var app = express();
+const express = require("express");
+const http = require("http");
+const bodyParser = require("body-parser");
+const logger = require("morgan");
+const path = require("path");
+const { MongoClient  } = require('mongodb');
+//const MongoClient = require("mongodb").MongoClient
+const app = express();
 
 require('dotenv').config()
+
 
 let db;
 let dbString = process.env.DB_STRING;
 let dbName = 'neopixel'
+
+/*
+ const { MongoClient  } = require('mongodb');
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true  });
+client.connect(err => {
+    const collection = client.db("test").collection("devices");
+      // perform actions on the collection object
+  //   client.close();
+  //
+});
+
+ */
+
 
 app.set("views", path.resolve(__dirname, "views")); //views are in folder ./views
 app.set("view engine", "ejs"); //ejs is the templating engine
