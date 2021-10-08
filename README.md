@@ -1,29 +1,30 @@
 # arduino-node-server
 
-Full-stack application built using node. Designed for 30+ arduinos to communicate at the same time, to upload/download data from a database, to send commands to each other.
+Full-stack application built using NodeJS. Designed for control of Neopixel LED strips attached to WiFi-capable arduinos that consume an API hosted on Heroku. The API has a front-end interface that where you can create no-code animations for the Neopixels and a way to push those animations to the arduino. This enables the remote control of LED lights from anywhere in the world.
 
 ## Description
 
-This project aims to create a full-stack web application using nodeJS server-side, and HTML, CSS, and JS client-side. The project will allow the arduinos to send data online so it can be stored, retrieved later, and plotted inside a dashboard. 
+This project aims to create a full-stack web application using nodeJS server-side, and HTML, CSS, and JS client-side. The NodeJS server is hosted on Heroku and serves an API that acts as a middleman between human and arduino clients. A human user can use a web-interface to interact with the server to send commands to the Neopixels. The arduino hosts its own web server that interacts with the Heroku server to receive commands from the API
 
-Arduino devices will also be able to communicate with each other. The server will allow human users to view data and control their arduino. The server will store data about the connected arduinos, including any data and commands uploaded. This web application is designed for a wifi-capable Arduinos. This project will NOT allow for remote programming of the arduinos.
+The database will store data about the connected arduinos, including any data and animations uploaded. This web application is designed for a wifi-capable Arduinos. This project will NOT allow for remote programming of the arduinos.
 
 ## Getting Started
 
 ### Dependencies
 
 - Node and npm
-- Arduino IDE
-- Arduino with WiFi capabilities
-- (Describe any prerequisites, libraries, OS version, etc., needed before installing program.)
-- TODO
+- Arduino
+    - IDE
+    - Arduino with WiFi capabilities
+- Heroku account
+- MongoDB account
 
 ### Installing
 
 - Clone this repository
-- (How/where to download your program)
+- Flash the .ino file to the arduino
+- npm install the server
 - (Any modifications needed to be made to files/folders)
-- TODO
 
 ### Executing program
 
@@ -43,32 +44,30 @@ code blocks for commands
 command to run if program contains helper info
 
 ```
-\
-&nbsp;
-
 
 # Design
 
 ## Mission Statement
 
-This project aims to create a web application that 30+ Arduinos devices can communicate with the server simultaneously. It will allow the arduinos to send data online so it can be stored, retrieved later, and plotted inside a dashboard. It needs to be accessible from any web browser or application in the world.
+This project aims to create a web application that a single Arduino device can communicate with. It will allow the arduinos to retrieve information about RGB led so it can be executed. It needs to be accessible from any web browser or application in the world.
 
 ## What is the problem?
 
 Creating a web application that can be accessed from anywhere, can manage user profiles, contains a dashboard, can control arduino devices.
 
+A way to control a string of Neopixels remotely from anywhere in the world using the internet and an arduino Wi-Fi capable arduino
+
 ### Relevant Context
 
-- University or highschool courses teach Internet of Things or distributed networks or work from home
-- Commercial and Industrial needs for collecting data from sensors distributed throughout a city
+- Convenient way to have Internet controlled RGB LED lights that you can control via a a web interface
+- University or highschool that courses teach Internet of Things
+- Commercial and Industrial needs for displaying LED signs and controlling lighting based on data
 - (Define circumstances. State the purpose. Define value of solution)
 
 ### Why this project?
 
-- Create my own IoT Dashboard to manage my home devices.
+- Create my own IoT Dashboard to manage my home LED strings.
 - Create real application that microcontrollers can use
-- Application I can present on my portfolio
-- Challenge myself
 
 ## Customers & Stakeholders
 
@@ -82,8 +81,8 @@ Creating a web application that can be accessed from anywhere, can manage user p
 
 Machine-to-Human Interaction
 
-- Arduinos can interact with and securely connect to the server to upload data
-- Dashboard that humans can use to view data
+- Arduinos can interact with and securely connect to the server to download data
+- Dashboard that humans can use to view control the LED and preview them
 
 Human-to-Machine Interaction
 
@@ -129,11 +128,23 @@ Machine-to-Machine Interaction
 - Front-end
     - HTML, CSS, JS
 - Back-End
-    - NodeJS
+    - NodeJS and Express
+- API - CRUD
+    - Create
+        - Create a new device
+        - Create a new animation for a device
+    - Read
+        - Arduino reads the animations for its device numner
+        - UI reads the animations for a set device
+    - Update
+        - Change the animation details
+    - Delete
+        - Remove a device
+        - Remove an animation
 
 ### Plan
 
-- Build from the ground up
+- Plan the most basic API( get the neopixels to Blink)
 - Any questions that come up, write them down and update them with the answer when resolved
 - Heavily document code to allow easy understanding and use
 - Push to git everyday
