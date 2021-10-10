@@ -52,9 +52,7 @@ app.get("/", function(request, response){
       response.render("client")
     })
     .catch(error => console.error(error))
-  console.log('rendered' + request.originalUrl)
-  //response.render("client")
-  //response.end("Hello, this is the homepage!");
+  //console.log('rendered' + request.originalUrl)
 });
 
 //remove this blynk page
@@ -64,10 +62,16 @@ app.get("/blynk", function(request, response){
 });
 
 app.post("/addAnimation", function(request, response){
-  //recieve the request and do something with it
+  //recieve the request and add inserOne to database
   console.log(request.body)
+  db.collection('device1').insertOne({name: request.body.animation,
+  delay: request.body.delay})
+    .then(result => {
+      console.log("Animation added to db")
+      response.redirect('/')
+    })
+    .catch(error => console.error(error))
 
-  response.redirect('/')
 });
 
 
