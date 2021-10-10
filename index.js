@@ -7,6 +7,7 @@ const path = require("path");
 const MongoClient = require("mongodb").MongoClient
 const app = express();
 
+// environment files excluded from git. has MongoDB user and passw
 require('dotenv').config()
 
 let db;
@@ -35,7 +36,7 @@ app.set("views", path.resolve(__dirname, "views")); //views are in folder ./view
 app.set("view engine", "ejs"); //ejs is the templating engine
 app.use(logger("short")); //Use Morgan for logging
 app.use(bodyParser.json()) //Use JSON
-app.use(bodyParser.urlencoded({extended: true})) //Places form data into body of request
+app.use(bodyParser.urlencoded({extended: true})) //Places form data into request body
 var publicPath = path.resolve(__dirname, "public");
 app.use(express.static(publicPath)); //Make the public folder accessible
 
@@ -44,7 +45,15 @@ var animations = [];
 app.locals.animations = animations;
 
 app.get("/", function(request, response){
-  response.render("client")
+  db.collection('device1').find().toArray()
+    .then(data => {
+      console.log('retrieved data from database')
+      console.log(data)
+      response.render("client")
+    })
+    .catch(error => console.error(error))
+  console.log('rendered' + request.originalUrl)
+  //response.render("client")
   //response.end("Hello, this is the homepage!");
 });
 
@@ -57,8 +66,7 @@ app.get("/blynk", function(request, response){
 app.post("/addAnimation", function(request, response){
   //recieve the request and do something with it
   console.log(request.body)
-  console.log(request.body.animation)
-  console.log(request.body.delay)
+
   response.redirect('/')
 });
 
