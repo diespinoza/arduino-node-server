@@ -6,6 +6,7 @@ const path = require("path");
 //const { MongoClient  } = require('mongodb');
 const MongoClient = require("mongodb").MongoClient
 const app = express();
+const PORT = 3000;
 
 // environment files excluded from git. has MongoDB user and passw
 require('dotenv').config()
@@ -65,7 +66,7 @@ app.get("/blynk", function(request, response){
 app.post("/addAnimation", function(request, response){
   // console.log("Check animation count:", animationsCount)
  // Check if there are too many animations
-  if(animationsCount <= 5){
+  if(animationsCount < 30){
     db.collection('device1').insertOne({name: request.body.animation,
       delay: request.body.delay})
       .then(result => {
@@ -102,8 +103,7 @@ app.use(function(request, response){
   response.end(404);
 });
 
-//ff
 //Start server
-http.createServer(app).listen(3000, () => {
+http.createServer(app).listen(process.env.PORT || PORT, () => {
   console.log('Started server on port 3000')
 });
