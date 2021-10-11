@@ -1,5 +1,5 @@
 <%- include('header') %>
-<h2>Control Neopixel Remotely!</h2>
+<h2>Control Neopixels Remotely!</h2>
 <h3>Select an animation</h3>
 
 <form action="/addAnimation" method="POST">
@@ -19,6 +19,7 @@
     <li class="animatio">
       <span><%= info[i].name %></span>
       <span><%= info[i].delay %></span>
+      <button type="button" class="rm-animation">Remove</button>
     </li>
   <% } %>
 </ul>

@@ -63,9 +63,8 @@ app.get("/blynk", function(request, response){
 });
 
 app.post("/addAnimation", function(request, response){
-  //recieve the request and add inserOne to database
-  console.log("Check animation count:", animationsCount)
- // console.log(animationsCount)
+  // console.log("Check animation count:", animationsCount)
+ // Check if there are too many animations
   if(animationsCount <= 5){
     db.collection('device1').insertOne({name: request.body.animation,
       delay: request.body.delay})
@@ -81,6 +80,17 @@ app.post("/addAnimation", function(request, response){
 
 });
 
+app.delete('/deleteAnimation', (request, response) => {
+  console.log(request.body.animationD);
+  console.log(request.body.delayD);
+  db.collection('device1').deleteOne({name: request.body.animationD,
+  delay: request.body.delayD})
+    .then(result => {
+      console.log('Animation Deleted')
+      response.json('Animation Deleted')
+    })
+    .catch(error => console.error(error))
+})
 
 app.get("/neopixel", function(request, response){
   response.end("This is where you can add another strip of LEDs to controll");
