@@ -1,16 +1,27 @@
 <%- include('header') %>
-<h2>Create Neopixel Animations!!</h2>
+<h2>Control Neopixel Remotely!</h2>
 <h3>Select an animation</h3>
 
 <form action="/addAnimation" method="POST">
   <select name="animation" id="animselect">
     <option value="blink">Blink</option>
     <option value="cylon">Cylon</option>
+    <option value="rainbow">Rainbow</option>
   </select>
   <label for="delay">Delay</label>
   <input type="number" placeholder="(milliseconds)" name="delay">
   <button type="submit">Submit</button>
 </form>
+
+<h3>Current Animations:</h3>
+<ul class="animations">
+  <% for(let i = 0; i < info.length; i++){ %>
+    <li class="animatio">
+      <span><%= info[i].name %></span>
+      <span><%= info[i].delay %></span>
+    </li>
+  <% } %>
+</ul>
 
 <script type="text/javascript" src="js/main.js"></script>
 <%- include('footer') %>
