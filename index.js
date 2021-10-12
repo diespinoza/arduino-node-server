@@ -57,11 +57,6 @@ app.get("/", function(request, response){
   //console.log('rendered' + request.originalUrl)
 });
 
-//remove this blynk page
-app.get("/blynk", function(request, response){
-  response.render("blynk");
-
-});
 
 app.post("/addAnimation", function(request, response){
   // console.log("Check animation count:", animationsCount)
