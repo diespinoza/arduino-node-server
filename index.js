@@ -88,8 +88,34 @@ app.delete('/deleteAnimation', (request, response) => {
     .catch(error => console.error(error))
 })
 
-app.get("/neopixel", function(request, response){
-  response.end("This is where you can add another strip of LEDs to controll");
+//Start of API
+app.get("/api/devices/:deviceId", function(request, response){
+  const device = request.params.devideId;
+  //hard coded device1 for now. Later device id will be added
+  db.collection('device1').find().toArray()
+    .then(data => {
+      animationsCount = data.length;
+      if(animationsCount === 0){
+        response.json({functions: "none", delay: ""})
+      } else {
+        //join all the function names and delays into comma separated string
+        //This simplifies parsing for the arduino. not sure if fast
+        //or really necessary.
+        let names = delays = "";
+        for(let i = 0; i < data.length; i++){
+          names += data[i].name + ",";
+          delays += data[i].delay + ",";
+        }
+       // const keys = Object.keys(data[0])
+        console.log(names)
+        console.log(delays)
+
+        //Respond with the animations.
+        response.json({functions: names, delay: delays});
+      }
+    })
+    .catch(error => console.error(error))
+
 });
 
 //404 page
