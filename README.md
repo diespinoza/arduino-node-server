@@ -1,23 +1,24 @@
 # arduino-node-server
 
-Full-stack application built using NodeJS. Designed for control of Neopixel LED strips attached to WiFi-capable arduinos that consume an API hosted on Heroku. The API has a front-end interface that where you can create no-code animations for the Neopixels and a way to push those animations to the arduino. This enables the remote control of LED lights from anywhere in the world.
+Control a string of WS2812 LEDs (Neopixels) from anywhere in the world using a WiFi capable arduino and a website! The website has a UI to control your strip of LED and it serves an API to talk to the arduinos and any application you want!
 
 ## Description
 
-This project aims to create a full-stack web application using nodeJS server-side, and HTML, CSS, and JS client-side. The NodeJS server is hosted on Heroku and serves an API that acts as a middleman between human and arduino clients. A human user can use a web-interface to interact with the server to send commands to the Neopixels. The arduino hosts its own web server that interacts with the Heroku server to receive commands from the API
+***Tech used:*** HTML, CSS, JavaScript, NodeJS, Express, Heroku, MongoDB, Arduino, WifiNina
+This project is a full-stack web application using a NodeJS server hosted on Heroku. It has a web interface where you can build a sequence of pre-built animations for your LEDs. It serves an API with the data on the sequences you create. This API is used to communicate with arduino clients or any other application you desire. Together the web interface and the API allow you to control your LEDs from anywhere.
 
-The database will store data about the connected arduinos, including any data and animations uploaded. This web application is designed for a wifi-capable Arduinos. This project will NOT allow for remote programming of the arduinos.
+This application also interacts with a MongoDB database where it stores information about the animation sequences, and the connected devies. This project does NOT allow for remote programming of the arduinos.
 
-## Getting Started
+## Getting Started with Controlling a Strip of LEDs
 
-### Dependencies
+### Materials needed
 
-- Node and npm
-- Arduino
-    - IDE
-    - Arduino with WiFi capabilities
-- Heroku account
-- MongoDB account
+- Arduino IDE (latest version)
+- Arduino Uno WiFi Rev 2 (only tested on this device for now)
+  - Wifi NiNA Library
+  - Updated firmware to the latest version
+      1. Check the current version with [this](https://www.arduino.cc/en/Tutorial/CheckWiFi101FirmwareVersion)
+      2. Update to the latest version with [this](https://www.arduino.cc/en/Tutorial/WiFiNINAFirmwareUpdater)
 
 ### Installing
 
@@ -31,19 +32,19 @@ The database will store data about the connected arduinos, including any data an
 - (How to run the program)
 - (Step-by-step bullets)
 
-```
-code blocks for commands
+    ```
+    code blocks for commands
 
-```
+    ```
 
 ### Help
 
 - (Any advise for common problems or issues.)
 
-```
-command to run if program contains helper info
+    ```
+    command to run if program contains helper info
 
-```
+    ```
 
 # Design
 
@@ -52,8 +53,6 @@ command to run if program contains helper info
 This project aims to create a web application that a single Arduino device can communicate with. It will allow the arduinos to retrieve information about RGB led so it can be executed. It needs to be accessible from any web browser or application in the world.
 
 ## What is the problem?
-
-Creating a web application that can be accessed from anywhere, can manage user profiles, contains a dashboard, can control arduino devices.
 
 A way to control a string of Neopixels remotely from anywhere in the world using the internet and an arduino Wi-Fi capable arduino
 
@@ -84,11 +83,11 @@ Machine-to-Human Interaction
 - Arduinos can interact with and securely connect to the server to download data
 - Dashboard that humans can use to view control the LED and preview them
 
-Human-to-Machine Interaction
+    Human-to-Machine Interaction
 
 - Humans can a dashboard use to send data and commands to arduino
 
-Machine-to-Machine Interaction
+    Machine-to-Machine Interaction
 
 - Arduinos can send data and commands to each other.
 
