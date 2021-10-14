@@ -5,13 +5,14 @@ Control a string of WS2812 LEDs (Neopixels) from anywhere in the world using a W
 ## Description
 
 ***Tech used:*** HTML, CSS, JavaScript, NodeJS, Express, Heroku, MongoDB, Arduino, WifiNina
+
 This project is a full-stack web application using a NodeJS server hosted on Heroku. It has a web interface where you can build a sequence of pre-built animations for your LEDs. It serves an API with the data on the sequences you create. This API is used to communicate with arduino clients or any other application you desire. Together the web interface and the API allow you to control your LEDs from anywhere.
 
 This application also interacts with a MongoDB database where it stores information about the animation sequences, and the connected devies. This project does NOT allow for remote programming of the arduinos.
 
 ## Getting Started with Controlling a Strip of LEDs
 
-### Materials needed
+### Materials & Dependencies
 
 - Arduino IDE (latest version)
 - Arduino Uno WiFi Rev 2 (only tested on this device for now)
@@ -24,8 +25,6 @@ This application also interacts with a MongoDB database where it stores informat
 
 - Clone this repository
 - Flash the .ino file to the arduino
-- npm install the server
-- (Any modifications needed to be made to files/folders)
 
 ### Executing program
 
