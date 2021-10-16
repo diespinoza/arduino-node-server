@@ -90,6 +90,7 @@ app.delete('/deleteAnimation', (request, response) => {
 
 //Start of API
 app.get("/api/devices/:deviceId", function(request, response){
+  console.log(request.headers.host)
   const device = request.params.devideId;
   //hard coded device1 for now. Later device id will be added
   db.collection('device1').find().toArray()
