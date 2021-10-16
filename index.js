@@ -99,6 +99,8 @@ app.get("/api/devices/:deviceId", function(request, response){
       if(animationsCount === 0){
         response.json({functions: "none", delay: ""})
       } else {
+        //This function is too slow. O(n) plus creating strings
+  /*
         //join all the function names and delays into comma separated string
         //This simplifies parsing for the arduino. not sure if fast
         //or really necessary.
@@ -110,9 +112,10 @@ app.get("/api/devices/:deviceId", function(request, response){
        // const keys = Object.keys(data[0])
         console.log(names)
         console.log(delays)
-
         //Respond with the animations.
         response.json({functions: names, delay: delays});
+  */
+        response.json(data);
       }
     })
     .catch(error => console.error(error))
