@@ -1,22 +1,19 @@
 /*
   Web client
 
- This sketch connects to a website (http://www.google.com)
+ This sketch connects to the arduino neopixel api
  using the WiFi module.
 
- This example is written for a network using WPA encryption. For
- WEP or WPA, change the WiFi.begin() call accordingly.
-
- This example is written for a network using WPA encryption. For
+ This sketch is written for a network using WPA encryption. For
  WEP or WPA, change the WiFi.begin() call accordingly.
 
  Circuit:
- * Board with NINA module (Arduino MKR WiFi 1010, MKR VIDOR 4000 and UNO WiFi Rev.2)
+ * Board with NINA module (Arduino UNO WiFi Rev.2)
 
- created 13 July 2010
- by dlf (Metodo2 srl)
- modified 31 May 2012
- by Tom Igoe
+Based off WifiWebClient example
+
+
+ by Diego E. R.
  */
 
 
