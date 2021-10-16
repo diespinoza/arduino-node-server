@@ -1,6 +1,6 @@
 # arduino-node-server
 
-Control a string of WS2812 LEDs (Neopixels) from anywhere in the world using a WiFi capable arduino and a website! The website has a UI to control your strip of LED and it serves an API to talk to the arduinos and any application you want!
+Control a string of WS2812 LEDs (Neopixels) from anywhere in the world using a WiFi capable arduino and a website! The server has a UI to control your strip of LED and it also serves an API to talk to the arduinos and any application you want!
 
 ## Description
 
@@ -9,6 +9,12 @@ Control a string of WS2812 LEDs (Neopixels) from anywhere in the world using a W
 This project is a full-stack web application using a NodeJS server hosted on Heroku. It has a web interface where you can build a sequence of pre-built animations for your LEDs. It serves an API with the data on the sequences you create. This API is used to communicate with arduino clients or any other application you desire. Together the web interface and the API allow you to control your LEDs from anywhere.
 
 This application also interacts with a MongoDB database where it stores information about the animation sequences, and the connected devies. This project does NOT allow for remote programming of the arduinos.
+
+Contrary to the name of the server, this project used the FastLED library instead of the Neoixel library to control the LEDs. The FastLED library was chosen because it has better documentation and way more functionality. The pre-built function that the user can pick from are defined in the arduino file.
+
+## Lessons Learned:
+
+- Make absolutely sure that you have the latest version of the Arduino IDE and the lastest WifiNina firmware uploaded to your arduino. Old versions of the IDE do not have the latest firmware.
 
 ## Getting Started with Controlling a Strip of LEDs
 
@@ -20,6 +26,7 @@ This application also interacts with a MongoDB database where it stores informat
   - Updated firmware to the latest version
       1. Check the current version with [this](https://www.arduino.cc/en/Tutorial/CheckWiFi101FirmwareVersion)
       2. Update to the latest version with [this](https://www.arduino.cc/en/Tutorial/WiFiNINAFirmwareUpdater)
+  - FastLED library
 
 ### Installing
 
@@ -98,17 +105,18 @@ Machine-to-Human Interaction
 
 ### What technologies and knowledge must be understood to solve the problem?
 
-- What is the internet?
 - HTML. CSS. JS
 - Arduino
 - APIs
 - Servers
 - Scripting
 - Databases
+- FastLED
+- WifiNina
 
 ### Risks that could lead to failure
 
-- The server and arduinos are incompatible in their communication standards
+- The server and arduino can't communicate
 - User doesn't know how to program an arduino
 
 ### Ethical dilemmas
@@ -118,6 +126,9 @@ Machine-to-Human Interaction
 ### Desired Result
 
 - Acceptance tests
+  1. Working wifi module
+  2. Working LED strip
+  3. GET request parsing
 
 ## Architecture
 
@@ -158,7 +169,9 @@ Diego Espinoza Rodriguez (diespinoza)
 
 ## License
 
-This project is licensed under the [NAME HERE] License - see the [LICENSE.md](http://license.md/) file for details
+TBD, it's open source though.
+<!--This project is licensed under the [NAME HERE] License - see the [LICENSE.md](http://license.md/) file for details
+-->
 
 ## Acknowledgments
 
