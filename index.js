@@ -6,6 +6,12 @@ const path = require("path");
 //const { MongoClient  } = require('mongodb');
 const MongoClient = require("mongodb").MongoClient
 const app = express();
+
+//tasks route
+const tasks = require('./routes/tasks');
+app.use('/api/v1/tasks', tasks);
+
+
 const PORT = 3000;
 
 // environment files excluded from git. has MongoDB user and passw
