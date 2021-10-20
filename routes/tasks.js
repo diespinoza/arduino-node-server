@@ -3,7 +3,12 @@ const express = require('express');
 const router = express.Router();
 
 const {
-  getAllTasks,
+  getAllAnimations,
+  createAnimation,
+  getAnimation,
+  updateAnimation,
+  deleteAnimation,
+  getAllDeviceAnimations,
 } = require('../controllers/tasks');
 
 /* What will this API look like?
@@ -28,7 +33,10 @@ const {
  *
  */
 
-router.route('/').get(getAllTasks);
+router.route('/').get(getAllAnimations).post(createAnimation);
+router.route('/:id').get(getAnimation).patch(updateAnimation).delete(deleteAnimation);
+router.route('/device/:id').get(getAllDeviceAnimations);
+
 
 
 module.exports = router;

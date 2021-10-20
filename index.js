@@ -9,7 +9,7 @@ const app = express();
 
 //tasks route
 const tasks = require('./routes/tasks');
-app.use('/api/v1/tasks', tasks);
+app.use('/api/v1/animations', tasks);
 
 
 const PORT = 3000;
