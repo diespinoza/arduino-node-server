@@ -25,9 +25,14 @@ const {
  *  app.get('/api/v1/animations/:id')
  *  get a single animation
  *
- *  app.post('/api/v1/animations')
- *  create a new animation
+ *  app.patch('/api/v1/animations/:id')
+ *  Update an animation
  *
+ *  app.delete('/api/v1/animations/:id')
+ *  delete an animation
+ *
+ *  app.get('/api/v1/animations/device/:id')
+ *  get animations for a device
  * For an arduino client device:
  *
  *

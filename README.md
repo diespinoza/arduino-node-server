@@ -140,16 +140,23 @@ Machine-to-Human Interaction
     - NodeJS and Express
 - API - CRUD
     - Create
-        - Create a new device
-        - Create a new animation for a device
+        - Create a new animation
+          - /api/v1/animations
     - Read
-        - Arduino reads the animations for its device numner
-        - UI reads the animations for a set device
+        - Get the homepage
+          - /
+        - Get all the animations in the Database
+          - /api/v1/animations
+        - Get a single animation 
+          - /api/v1/animations//:id
+        - Get all the animations for a specific device
+          - /api/v1/animations/device/:id
     - Update
-        - Change the animation details
+        - Change the animation
+          - /api/v1/animations/:id
     - Delete
-        - Remove a device
         - Remove an animation
+          - /api/v1/animations/:id
 
 ### Plan
 
