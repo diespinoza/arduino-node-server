@@ -82,7 +82,7 @@ void setup() {
   LEDS.addLeds<LED_TYPE,DATA_PIN,COLOR_ORDER>(leds, NUM_LEDS).setCorrection(Typical8mmPixel); 
   LEDS.setBrightness(BRIGHTNESS);
 
-  fill_solid(leds, 50, CRGB::Red);
+  fill_solid(leds, NUM_LEDS, CRGB::Red);
   FastLED.show();
   // attempt to connect to WiFi network:
   while (status != WL_CONNECTED) {
