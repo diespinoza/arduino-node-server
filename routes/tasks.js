@@ -31,9 +31,9 @@ const {
  *  app.delete('/api/v1/animations/:id')
  *  delete an animation
  *
+ * For an arduino client device:
  *  app.get('/api/v1/animations/device/:id')
  *  get animations for a device
- * For an arduino client device:
  *
  *
  */
