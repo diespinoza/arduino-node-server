@@ -1,6 +1,12 @@
+// # Controllers
 
-const getAllAnimations= (req,res) => {
-  res.send('get allturkeyu chicken the tasks');
+const getAllAnimations= async (req,res) => {
+  try{
+    res.send('get allturkeyu chicken the tasks');
+    //const animation = await Anim
+  } catch(error){
+
+  }
 }
 
 const createAnimation = (req,res) => {
