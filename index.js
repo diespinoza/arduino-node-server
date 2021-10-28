@@ -22,11 +22,11 @@ let dbConnectionStr = process.env.DB_STRING;
 let dbName = 'fastled-animations'
 
 
-MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
-  .then(client => {
-    console.log(`Connected to ${dbName} Database`)
-    db = client.db(dbName)
-  })
+// MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
+//   .then(client => {
+//     console.log(`Connected to ${dbName} Database`)
+//     db = client.db(dbName)
+//   })
 
 /*
 const client = new MongoClient(dbConnectionStr, { useNewUrlParser: true, useUnifiedTopology: true  });
