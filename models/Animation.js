@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const AnimationSchema = new mongoose.Schema({
   name: {
     type: String,
-    requiredL: [true, 'must provide name'],
+    required: [true, 'must provide name'],
     trim:true,
     maxlength: [20, 'name cannot be more than 20 characters'],
   },
@@ -13,3 +13,5 @@ const AnimationSchema = new mongoose.Schema({
     default: 10
   },
 });
+
+module.exports = mongoose.model('Animation', AnimationSchema);

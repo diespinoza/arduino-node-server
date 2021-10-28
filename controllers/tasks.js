@@ -1,5 +1,7 @@
 // # Controllers
 
+const Animation = require('../models/Animation');
+
 const getAllAnimations= async (req,res) => {
   try{
     res.send('get allturkeyu chicken the tasks');
