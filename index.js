@@ -1,11 +1,12 @@
 const express = require("express");
-const http = require("http");
+// const http = require("http");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
 const path = require("path");
-//const { MongoClient  } = require('mongodb');
-const MongoClient = require("mongodb").MongoClient
+const connectDB = require('./db/connect');
 const app = express();
+//const { MongoClient  } = require('mongodb');
+// const MongoClient = require("mongodb").MongoClient
 
 //tasks route
 const tasks = require('./routes/tasks');
@@ -14,7 +15,7 @@ app.use('/api/v1/animations', tasks);
 
 const PORT = 3000;
 
-// environment files excluded from git. has MongoDB user and passw
+// environment files. excluded from git
 require('dotenv').config()
 
 let db;
@@ -134,7 +135,21 @@ app.use(function(request, response){
   response.end(404);
 });
 
+
+const start = async () => {
+  try{
+    await connectDB(dbConnectionStr);
+    app.listen(process.env.PORT || PORT, console.log(`server is listening on port ${PORT}...`));
+  } catch(error){
+    console.log(error)
+  }
+}
+
+
+start();
+
 //Start server
-http.createServer(app).listen(process.env.PORT || PORT, () => {
-  console.log('Started server on port 3000')
-});
+// // start when connected to db succesfully
+// http.createServer(app).listen(process.env.PORT || PORT, () => {
+//   console.log('Started server on port 3000')
+// });
