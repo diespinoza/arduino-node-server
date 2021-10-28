@@ -4,30 +4,79 @@ const Animation = require('../models/Animation');
 
 const getAllAnimations= async (req,res) => {
   try{
-    res.send('get allturkeyu chicken the tasks');
-    //const animation = await Anim
+    const animations = await Animation.find({});
+    res.status(200).json({animations});
   } catch(error){
-
+    res.status(500).json({msg: error});
   }
 }
 
-const createAnimation = (req,res) => {
-  res.send('creating a new animation');
+const createAnimation = async (req,res) => {
+  try{
+    // console.log(req.body);
+    const animation = await Animation.create(req.body);
+    res.status(201).json({animation});
+  } catch (error){
+    res.status(500).json({msg: error});
+  }
 }
 
-const getAnimation = (req,res) => {
-  res.send('get a single animation');
+const getAnimation = async (req,res) => {
+  try{
+    const {id: animationID} = req.params;
+    const animation = await Animation.findOne({_id:animationID})
+    //Check if no animation was found. Returns because
+    // it will not go into the catch block
+    if(!animation){
+      return res.status(404).json({msg: `No animation with id: ${animationID}`});
+    }
+    //return normally if animation found
+    res.status(200).json({animation});
+  } catch (error){
+    //goes here if the id syntax was incorrect
+    res.status(500).json({msg: error});
+  }
+
 }
 
-const updateAnimation = (req,res) => {
-  res.send('Update a single animation');
+const updateAnimation = async (req,res) => {
+  //to update, need the id as well as req.body
+  //pass the options into the schema validators too
+  try{
+    const {id: animationID} = req.params;
+    const animation = await Animation.findOneAndUpdate({_id:animationID}, req.body, {
+      new: true, //returns the newly updated object
+      runValidators: true,
+    });
+
+    if(!animation){
+      return res.status(404).json({msg: `No animation with id: ${animationID}`});
+    }
+    //return normally if animation found
+    res.status(200).json({animation});
+  } catch (error){
+    res.status(500).json({msg: error});
+  }
 }
 
-const deleteAnimation = (req,res) => {
-  res.send('delete an animation');
+const deleteAnimation = async (req,res) => {
+  try{
+    const {id: animationID} = req.params;
+    const animation = await Animation.findOneAndDelete({_id:animationID})
+    //Check if no animation was found.
+    if(!animation){
+      return res.status(404).json({msg: `No animation with id: ${animationID}`});
+    }
+    //return normally if animation found
+    //note: you dont have to respond with the object
+    //the UI doesnt care. just cares if it was successfull
+    res.status(200).json({animation});
+  } catch (error){
+    res.status(500).json({msg: error});
+  }
 }
 
-const getAllDeviceAnimations = (req,res) => {
+const getAllDeviceAnimations = async (req,res) => {
   res.send('get all animations for a device');
 }
 
