@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 // const http = require("http");
-// const bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
 const logger = require("morgan");
 const path = require("path");
 const connectDB = require('./db/connect');
@@ -22,9 +22,9 @@ app.set("view engine", "ejs"); //ejs is the templating engine
 app.use(logger("short")); //Use Morgan for logging
 
 //removing body parser use express intead. Used json in body of req
-app.use(express.json());
-// app.use(bodyParser.json()) //Use JSON
-// app.use(bodyParser.urlencoded({extended: true}))
+// app.use(express.json());
+app.use(bodyParser.json()) //Use JSON
+app.use(bodyParser.urlencoded({extended: true}))
 
 //Make the public folder accessible
 var publicPath = path.resolve(__dirname, "public");
@@ -39,8 +39,8 @@ const Animation = require('./models/Animation');
 app.get("/", async function(request, response){
   try{
     const animations = await Animation.find({});
-    console.log('retrieved data from database: ')
-    console.log(animations);
+//    console.log('retrieved data from database: ')
+//    console.log(animations);
     // animationsCount = data.length
     response.render("client", {info: animations});
 

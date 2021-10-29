@@ -2,14 +2,18 @@
 <h2>Control Neopixels Remotely!</h2>
 <h3>Select an animation</h3>
 
-<form action="/addAnimation" method="POST">
-  <select name="animation" id="animselect">
+<!-- 
+changing this to make request from javascript 
+<form action="/api/v1/animations" method="POST" target="_self">
+-->
+<form class="animation-form">
+  <select name="name" id="animselect" class="animation-select">
     <option value="blink">Blink</option>
     <option value="cylon">Cylon</option>
     <option value="rainbow">Rainbow</option>
   </select>
   <label for="delay">Delay</label>
-  <input type="number" placeholder="(milliseconds)" name="delay">
+  <input type="number" placeholder="(milliseconds)" name="delay" class = "animation-delay">
   <button type="submit">Submit</button>
 </form>
 

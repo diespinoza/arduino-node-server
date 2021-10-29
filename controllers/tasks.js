@@ -13,11 +13,12 @@ const getAllAnimations= async (req,res) => {
 
 const createAnimation = async (req,res) => {
   try{
-    // console.log(req.body);
+    console.log(req.body);
     const animation = await Animation.create(req.body);
+    // res.status(201).redirect('/');
     res.status(201).json({animation});
   } catch (error){
-    res.status(500).json({msg: error});
+    res.status(500).json({msg: error})
   }
 }
 
