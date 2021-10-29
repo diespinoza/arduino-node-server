@@ -76,6 +76,7 @@ const deleteAnimation = async (req,res) => {
   }
 }
 
+//TODO not sure if needed yet
 const getAllDeviceAnimations = async (req,res) => {
   res.send('get all animations for a device');
 }

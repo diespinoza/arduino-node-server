@@ -9,8 +9,6 @@ const connectDB = require('./db/connect');
 // const MongoClient = require("mongodb").MongoClient
 
 
-const PORT = 3000;
-
 // environment files. excluded from git
 require('dotenv').config()
 
@@ -23,7 +21,7 @@ app.set("views", path.resolve(__dirname, "views")); //views are in folder ./view
 app.set("view engine", "ejs"); //ejs is the templating engine
 app.use(logger("short")); //Use Morgan for logging
 
-//removing body parser use express intead
+//removing body parser use express intead. Used json in body of req
 app.use(express.json());
 // app.use(bodyParser.json()) //Use JSON
 // app.use(bodyParser.urlencoded({extended: true}))
@@ -34,18 +32,35 @@ app.use(express.static(publicPath));
 
 //animations count in database variable
 var animationsCount = 0;
+//animation schema
+const Animation = require('./models/Animation');
 
-app.get("/", function(request, response){
-  db.collection('device1').find().toArray()
-    .then(data => {
-      console.log('retrieved data from database')
-      animationsCount = data.length
-      console.log(animationsCount)
-      response.render("client", {info: data})
-    })
-    .catch(error => console.error(error))
-  //console.log('rendered' + request.originalUrl)
+
+app.get("/", async function(request, response){
+  try{
+    const animations = await Animation.find({});
+    console.log('retrieved data from database: ')
+    console.log(animations);
+    // animationsCount = data.length
+    response.render("client", {info: animations});
+
+  } catch (error){
+
+  }
 });
+
+
+//app.get("/", function(request, response){
+//  db.collection('device1').find().toArray()
+//    .then(data => {
+//      console.log('retrieved data from database')
+//      animationsCount = data.length
+//      console.log(animationsCount)
+//      response.render("client", {info: data})
+//    })
+//    .catch(error => console.error(error))
+//  //console.log('rendered' + request.originalUrl)
+//});
 
 
 app.post("/addAnimation", function(request, response){
@@ -89,22 +104,6 @@ app.get("/api/devices/:deviceId", function(request, response){
       if(animationsCount === 0){
         response.json({functions: "none", delay: ""})
       } else {
-        //This function is too slow. O(n) plus creating strings
-        /*
-          //join all the function names and delays into comma separated string
-          //This simplifies parsing for the arduino. not sure if fast
-          //or really necessary.
-        let names = delays = "";
-        for(let i = 0; i < data.length; i++){
-          names += data[i].name + ",";
-          delays += data[i].delay + ",";
-        }
-        // const keys = Object.keys(data[0])
-        console.log(names)
-        console.log(delays)
-        //Respond with the animations.
-        response.json({functions: names, delay: delays});
-        */
         response.json(data);
       }
     })
@@ -121,13 +120,15 @@ app.get("/api/devices/:deviceId", function(request, response){
 
 
 
-//tasks route
-const tasks = require('./routes/tasks');
-app.use('/api/v1/animations', tasks);
+//api tasks route
+const animations = require('./routes/tasks');
+app.use('/api/v1/animations', animations);
 
 
 //function that will start the server after
 //  connecting to the DB
+const PORT = 3000;
+
 const start = async () => {
   try{
     await connectDB(dbConnectionStr);
