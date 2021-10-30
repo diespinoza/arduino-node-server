@@ -7,23 +7,9 @@ const animationInputDOM = document.querySelector('.animation-delay');
 Array.from(deleteBttns).forEach((element) => {
   element.addEventListener('click', deleteAnimation)
 })
-
 formDOM.addEventListener('submit', createAnimation);
 
-
-
-// formDOM.addEventListener('submit', async (e) => {
-//   e.preventDefault();
-//   const name = animationSelectDOM;
-//   const delay = animationInputDOM;
-
-//   console.log(name.value);
-//   console.log(delay.value);
-
-// })
-
-
-
+//delete
 async function deleteAnimation(){
   //childnodes 1 and 3 extract the correct strings
   const aName = this.parentNode.childNodes[1].innerText;
@@ -50,7 +36,7 @@ async function deleteAnimation(){
   }
 }
 
-
+//create
 async function createAnimation(e){
   try{
     e.preventDefault();
@@ -67,7 +53,6 @@ async function createAnimation(e){
     })
     const data = await response.json()
     // do nothing with data, just reload the page
-    // maybe check if the response was successful status
     // console.log(data)
     location.reload()
   } catch(error){

@@ -84,7 +84,6 @@ const getAllDeviceAnimations = async (req,res) => {
 }
 
 //Object of controllers functions to export
-//
 module.exports = {
   getAllAnimations,
   createAnimation,
