@@ -40,7 +40,7 @@ app.get("/", async function(request, response){
   try{
     const animations = await Animation.find({});
 //    console.log('retrieved data from database: ')
-//    console.log(animations);
+    // console.log(animations);
     // animationsCount = data.length
     response.render("client", {info: animations});
 

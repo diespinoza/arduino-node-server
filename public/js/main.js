@@ -28,9 +28,11 @@ async function deleteAnimation(){
   //childnodes 1 and 3 extract the correct strings
   const aName = this.parentNode.childNodes[1].innerText;
   const aDelay = this.parentNode.childNodes[3].innerText;
+  const aID = this.id;
+  // console.log(aID)
 
   try{
-    const response = await fetch('deleteAnimation', {
+    const response = await fetch(`api/v1/animations/${aID}`, {
       method: 'delete',
       headers: {'Content-type': 'application/json'},
       body: JSON.stringify({
@@ -68,10 +70,8 @@ async function createAnimation(e){
     // maybe check if the response was successful status
     // console.log(data)
     location.reload()
-
   } catch(error){
     console.log(error)
   }
-
 }
 
