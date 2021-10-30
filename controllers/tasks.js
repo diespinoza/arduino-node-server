@@ -71,6 +71,7 @@ const deleteAnimation = async (req,res) => {
     //return normally if animation found
     //note: you dont have to respond with the object
     //the UI doesnt care. just cares if it was successfull
+    console.log(animation);
     res.status(200).json({animation});
   } catch (error){
     res.status(500).json({msg: error});

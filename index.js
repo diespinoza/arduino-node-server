@@ -12,9 +12,9 @@ const connectDB = require('./db/connect');
 // environment files. excluded from git
 require('dotenv').config()
 
-let db;
+// let db;
 let dbConnectionStr = process.env.DB_STRING;
-let dbName = 'fastled-animations'
+// let dbName = 'fastled-animations'
 
 
 app.set("views", path.resolve(__dirname, "views")); //views are in folder ./views
@@ -63,53 +63,51 @@ app.get("/", async function(request, response){
 //});
 
 
-app.post("/addAnimation", function(request, response){
-  // console.log("Check animation count:", animationsCount)
-  // Check if there are too many animations
-  if(animationsCount < 30){
-    db.collection('device1').insertOne({name: request.body.animation,
-      delay: request.body.delay})
-      .then(result => {
-        console.log("Animation added to db")
-        response.redirect('/')
-      })
-      .catch(error => console.error(error))
-  } else {
-    console.log("too many animations")
-    response.redirect('/')
-  }
+// app.post("/addAnimation", function(request, response){
+//   // console.log("Check animation count:", animationsCount)
+//   // Check if there are too many animations
+//   if(animationsCount < 30){
+//     db.collection('device1').insertOne({name: request.body.animation,
+//       delay: request.body.delay})
+//       .then(result => {
+//         console.log("Animation added to db")
+//         response.redirect('/')
+//       })
+//       .catch(error => console.error(error))
+//   } else {
+//     console.log("too many animations")
+//     response.redirect('/')
+//   }
+// });
 
-});
-
-app.delete('/deleteAnimation', (request, response) => {
-  console.log(request.body.animationD);
-  console.log(request.body.delayD);
-  db.collection('device1').deleteOne({name: request.body.animationD,
-    delay: request.body.delayD})
-    .then(result => {
-      console.log('Animation Deleted')
-      response.json('Animation Deleted')
-    })
-    .catch(error => console.error(error))
-})
+// app.delete('/deleteAnimation', (request, response) => {
+//   console.log(request.body.animationD);
+//   console.log(request.body.delayD);
+//   db.collection('device1').deleteOne({name: request.body.animationD,
+//     delay: request.body.delayD})
+//     .then(result => {
+//       console.log('Animation Deleted')
+//       response.json('Animation Deleted')
+//     })
+//     .catch(error => console.error(error))
+// })
 
 //Start of API
-app.get("/api/devices/:deviceId", function(request, response){
-  console.log(request.headers.host)
-  const device = request.params.devideId;
-  //hard coded device1 for now. Later device id will be added
-  db.collection('device1').find().toArray()
-    .then(data => {
-      animationsCount = data.length;
-      if(animationsCount === 0){
-        response.json({functions: "none", delay: ""})
-      } else {
-        response.json(data);
-      }
-    })
-    .catch(error => console.error(error))
-
-});
+//app.get("/api/devices/:deviceId", function(request, response){
+//  console.log(request.headers.host)
+//  const device = request.params.devideId;
+//  //hard coded device1 for now. Later device id will be added
+//  db.collection('device1').find().toArray()
+//    .then(data => {
+//      animationsCount = data.length;
+//      if(animationsCount === 0){
+//        response.json({functions: "none", delay: ""})
+//      } else {
+//        response.json(data);
+//      }
+//    })
+//    .catch(error => console.error(error))
+//});
 
 //this page is broken
 // 404 page

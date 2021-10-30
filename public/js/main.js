@@ -41,7 +41,7 @@ async function deleteAnimation(){
       })
     })
     const data = await response.json()
-    console.log(data)
+    // console.log(data)
     //not sure what this does
     location.reload()
 
