@@ -1,18 +1,18 @@
 /*
-  Fast LED Web client
+   Fast LED Web client
 
- This sketch connects to the arduino neopixel api
- using the WiFi module. It uses the FastLED library to control a string
- of RGB LEDs
+   This sketch connects to the arduino neopixel api
+   using the WiFi module. It uses the FastLED library to control a string
+   of RGB LEDs
 
- This sketch is written for a network using WPA encryption. For
- WEP or WPA, change the WiFi.begin() call accordingly.
+   This sketch is written for a network using WPA encryption. For
+   WEP or WPA, change the WiFi.begin() call accordingly.
 
- Circuit:
+Circuit:
  * Board with NINA module (Arduino UNO WiFi Rev.2)
  * WS2812 LED strip (any length)
 
-Based off WifiWebClient example
+ Based off WifiWebClient example
 
 
  by Diego E. R.
@@ -22,6 +22,9 @@ Based off WifiWebClient example
 #include <SPI.h>
 #include <WiFiNINA.h>
 #include <FastLED.h>
+//Needed if storing the ID of the animation
+//#define ARDUINOJSON_USE_LONG_LONG 1 
+#include <ArduinoJson.h>
 
 #include "arduino_secrets.h" 
 /****************** WiFI Client Settings  ******************/
@@ -102,13 +105,14 @@ void setup() {
   if (client.connect(server, port)) {
     Serial.println("connected to server");
     // Make a HTTP request:
-   // client.println("GET /api/devices/1 HTTP/1.1");
+    // client.println("GET /api/devices/1 HTTP/1.1");
     client.println("GET /api/v1/animations HTTP/1.1");
     client.print("Host: ");
     client.println(server);
     client.println("Connection: close");
     client.println();
   }
+
 }
 
 /***** FastLED List of Animations *****/
@@ -120,9 +124,33 @@ uint8_t gHue = 0; // rotating "base color" used by many of the patterns
 
 /***** The main LOOP *****/
 void loop() {
+  bool gotStatus = false;
+  bool gotHeaders = false;
+
   // if there are incoming bytes available
   // from the server, read them and print them:
   while (client.available()) {
+    //Serial.println("here again");
+    //Check HTTP status
+    if(!gotStatus){
+      Serial.println("checking the response status...");
+      char status[32] = {0};
+      client.readBytesUntil('\r', status, sizeof(status));
+      Serial.print(status);
+      Serial.println(" was the status.");
+      gotStatus = true;
+    }
+    //Skip HTTP headers
+    if(!gotHeaders){
+      Serial.println("Checking headers...");
+      char endOfHeaders[] = "\r\n\r\n";
+      //Serial.println(client.readStringUntil(endOfHeaders)); 
+      if(client.find(endOfHeaders)){
+        Serial.println("got them headers");
+      } 
+      gotHeaders = true;
+    }
+
     char c = client.read();
     Serial.write(c);
   }
@@ -137,12 +165,12 @@ void loop() {
     while (true){
       // Call the current pattern function once, updating the 'leds' array
       gPatterns[gCurrentPatternNumber]();
-    
+
       // send the 'leds' array out to the actual LED strip
       FastLED.show();  
       // insert a delay to keep the framerate modest
       FastLED.delay(1000/120); 
-    
+
       // do some periodic updates
       EVERY_N_MILLISECONDS( 20 ) { gHue++; } // slowly cycle the "base color" through the rainbow
       EVERY_N_SECONDS( 10 ) { nextPattern(); } // change patterns periodically
