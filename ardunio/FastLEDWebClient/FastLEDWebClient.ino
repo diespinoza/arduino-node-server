@@ -102,7 +102,8 @@ void setup() {
   if (client.connect(server, port)) {
     Serial.println("connected to server");
     // Make a HTTP request:
-    client.println("GET /api/devices/1 HTTP/1.1");
+   // client.println("GET /api/devices/1 HTTP/1.1");
+    client.println("GET /api/v1/animations HTTP/1.1");
     client.print("Host: ");
     client.println(server);
     client.println("Connection: close");
