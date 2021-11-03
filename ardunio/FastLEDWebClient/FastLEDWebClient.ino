@@ -14,7 +14,6 @@ Circuit:
 
  Based off WifiWebClient example
 
-
  by Diego E. R.
  */
 
@@ -23,10 +22,10 @@ Circuit:
 #include <WiFiNINA.h>
 #include <FastLED.h>
 //Needed if storing the ID of the animation
-//#define ARDUINOJSON_USE_LONG_LONG 1 
+#define ARDUINOJSON_USE_LONG_LONG 1 
 #include <ArduinoJson.h>
-
 #include "arduino_secrets.h" 
+
 /****************** WiFI Client Settings  ******************/
 ///////please enter your sensitive data in the Secret tab/arduino_secrets.h
 char ssid[] = SECRET_SSID;        // your network SSID (name)
@@ -58,6 +57,11 @@ WiFiClient client;
 
 // Define the array of leds
 CRGB leds[NUM_LEDS];
+
+
+/****************** ArduinoJson Settings  ******************/
+//StaticJsonDocument<32> filter;
+StaticJsonDocument<512> doc;
 
 
 /****************** Program Start  ******************/
@@ -112,8 +116,8 @@ void setup() {
     client.println("Connection: close");
     client.println();
   }
-
 }
+
 
 /***** FastLED List of Animations *****/
 // List of patterns to cycle through.  Each is defined as a separate function below.
@@ -122,15 +126,17 @@ SimplePatternList gPatterns = { rainbow, cylon};
 uint8_t gCurrentPatternNumber = 0; // Index number of which pattern is current
 uint8_t gHue = 0; // rotating "base color" used by many of the patterns
 
-/***** The main LOOP *****/
+
+/*************** The main LOOP ***************/
 void loop() {
   bool gotStatus = false;
   bool gotHeaders = false;
+  bool gotJson = false;
 
   // if there are incoming bytes available
   // from the server, read them and print them:
   while (client.available()) {
-    //Serial.println("here again");
+    
     //Check HTTP status
     if(!gotStatus){
       Serial.println("checking the response status...");
@@ -140,6 +146,7 @@ void loop() {
       Serial.println(" was the status.");
       gotStatus = true;
     }
+    
     //Skip HTTP headers
     if(!gotHeaders){
       Serial.println("Checking headers...");
@@ -151,9 +158,59 @@ void loop() {
       gotHeaders = true;
     }
 
-    char c = client.read();
-    Serial.write(c);
+    //Start using JSON
+    if(gotStatus && gotHeaders && !gotJson){
+      Serial.println("Getting JSON");
+      
+      //Setting up filter     
+      StaticJsonDocument<32> filter; 
+      //JsonObject filter_animations_0 = filter["animations"];//.createNestedObject();
+      //filter_animations_0["name"] = true;
+      //filter_animations_0["delay"] = true;
+      filter["animations"][0]["name"] = true;
+      filter["animations"][0]["delay"] = true;
+      
+      Serial.println("Here is the filter:");
+      serializeJsonPretty(filter, Serial);
+
+      //Read the JSON into the JSON object
+      DeserializationError error = deserializeJson(doc, client, DeserializationOption::Filter(filter));
+
+      if(error) {
+        //Serial.print(F("deserializeJson() failed: "));
+        Serial.print("deserializationJson() failed: ");
+        Serial.println(error.f_str());
+        gotJson = true;
+        return;
+      }
+      Serial.print("\n Error was: ");
+      Serial.println(error.f_str());
+      
+      // Serial.print(doc["animations"].as<const char*>());
+      const char* animations_item_name;
+      long long animations_item_delay;
+      
+      
+      for (JsonObject animations_item : doc["animations"].as<JsonArray>()) {
+        animations_item_name = animations_item["name"]; // "rainbow", "blink", "rainbow", "rainbow",
+        animations_item_delay = animations_item["delay"]; // 12345, 1111111111111111, 45554, 1, 222, 
+        
+        //const char* animations_item_name = animations_item["name"]; // "rainbow", "blink", "rainbow", "rainbow",
+        //long long animations_item_delay = animations_item["delay"]; // 12345, 1111111111111111, 45554, 1, 222, 
+      }
+      Serial.println(animations_item_name[0]);
+
+     
+      gotJson = true;
+    }
+    
+    //char c = client.read();
+    //Serial.write(c);
   }
+  
+  Serial.println("Data from client not available");
+  
+
 
   // if the server's disconnected, stop the client:
   if (!client.connected()) {
@@ -220,7 +277,7 @@ void rainbow()
 
 void cylon(){
   static uint8_t hue = 0;
-  Serial.print("x");
+  //Serial.print("x");
   // First slide the led in one direction
   for(int i = 0; i < NUM_LEDS; i++) {
     // Set the i'th led to red 
@@ -233,7 +290,7 @@ void cylon(){
     // Wait a little bit before we loop around and do it again
     delay(10);
   }
-  Serial.print("x");
+  //Serial.print("x");
 
   // Now go in the other direction.  
   for(int i = (NUM_LEDS)-1; i >= 0; i--) {

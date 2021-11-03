@@ -1,6 +1,6 @@
 # Arduino Notes
 
-## Questions and Answers
+## Lessons Learned
 - What is `\n` ?
   - new line. moves the active position to the initial position of the next line
 - What is `\r` ?
@@ -9,6 +9,8 @@
    - Reads in one character at a time before looping again
 - Do you need to skip the http headers from the wificlient input stream?
   - Yes, the input to the arduinoJson library should only be json. otherwise it won't work 
+- What does the `F()` function do when inside of a `Serial.print()`?
+  - It moves constant strings to memory instead of ram. This will take up more program space but free up dynamic memory (ram). 
 
 
 ### Example for arduinoJson libray use from the web assistant
@@ -39,6 +41,4 @@
 
             
         }
-
-
 
