@@ -60,8 +60,8 @@ CRGB leds[NUM_LEDS];
 
 
 /****************** ArduinoJson Settings  ******************/
-//StaticJsonDocument<32> filter;
-StaticJsonDocument<512> doc;
+StaticJsonDocument<48> filter;
+StaticJsonDocument<768> doc;
 
 
 /****************** Program Start  ******************/
@@ -163,12 +163,9 @@ void loop() {
       Serial.println("Getting JSON");
       
       //Setting up filter     
-      StaticJsonDocument<32> filter; 
-      //JsonObject filter_animations_0 = filter["animations"];//.createNestedObject();
-      //filter_animations_0["name"] = true;
-      //filter_animations_0["delay"] = true;
-      filter["animations"][0]["name"] = true;
-      filter["animations"][0]["delay"] = true;
+      JsonObject filter_animations_0 = filter["animations"].createNestedObject();
+      filter_animations_0["name"] = true;
+      filter_animations_0["delay"] = true;
       
       Serial.println("Here is the filter:");
       serializeJsonPretty(filter, Serial);
@@ -185,6 +182,10 @@ void loop() {
       }
       Serial.print("\n Error was: ");
       Serial.println(error.f_str());
+
+
+      Serial.println("Here is the doc: ");
+      serializeJsonPretty(doc, Serial);
       
       // Serial.print(doc["animations"].as<const char*>());
       const char* animations_item_name;
@@ -194,12 +195,13 @@ void loop() {
       for (JsonObject animations_item : doc["animations"].as<JsonArray>()) {
         animations_item_name = animations_item["name"]; // "rainbow", "blink", "rainbow", "rainbow",
         animations_item_delay = animations_item["delay"]; // 12345, 1111111111111111, 45554, 1, 222, 
-        
+       Serial.println("Printing animations one by one");
+       Serial.print(animations_item_name);
+       Serial.print(" : ");
+       Serial.println(animations_item_delay);
         //const char* animations_item_name = animations_item["name"]; // "rainbow", "blink", "rainbow", "rainbow",
         //long long animations_item_delay = animations_item["delay"]; // 12345, 1111111111111111, 45554, 1, 222, 
-      }
-      Serial.println(animations_item_name[0]);
-
+      }   
      
       gotJson = true;
     }
