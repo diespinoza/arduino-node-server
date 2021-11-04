@@ -122,7 +122,7 @@ void setup() {
 /***** FastLED List of Animations *****/
 // List of patterns to cycle through.  Each is defined as a separate function below.
 typedef void (*SimplePatternList[])();
-SimplePatternList gPatterns = { rainbow, cylon};
+SimplePatternList gPatterns = { rainbow, cylon, blink};
 uint8_t gCurrentPatternNumber = 0; // Index number of which pattern is current
 uint8_t gHue = 0; // rotating "base color" used by many of the patterns
 
@@ -195,10 +195,10 @@ void loop() {
       for (JsonObject animations_item : doc["animations"].as<JsonArray>()) {
         animations_item_name = animations_item["name"]; // "rainbow", "blink", "rainbow", "rainbow",
         animations_item_delay = animations_item["delay"]; // 12345, 1111111111111111, 45554, 1, 222, 
-       Serial.println("Printing animations one by one");
-       Serial.print(animations_item_name);
-       Serial.print(" : ");
-       Serial.println(animations_item_delay);
+      // Serial.println("Printing animations one by one");
+      // Serial.print(animations_item_name);
+      // Serial.print(" : ");
+      // Serial.println(animations_item_delay);
         //const char* animations_item_name = animations_item["name"]; // "rainbow", "blink", "rainbow", "rainbow",
         //long long animations_item_delay = animations_item["delay"]; // 12345, 1111111111111111, 45554, 1, 222, 
       }   
@@ -306,5 +306,16 @@ void cylon(){
     // Wait a little bit before we loop around and do it again
     delay(10);
   }   
+
+}
+
+
+void blink(){
+  fill_solid(leds, NUM_LEDS, CHSV(gHue, 255, 255));
+  FastLED.show();   
+  delay(300);
+  fill_solid(leds, NUM_LEDS, CRGB(0, 0, 0));
+  FastLED.show();    
+  delay(300);
 
 }
