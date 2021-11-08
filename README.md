@@ -28,31 +28,32 @@ Contrary to the name of the server, this project used the FastLED library instea
       2. Update to the latest version with [this](https://www.arduino.cc/en/Tutorial/WiFiNINAFirmwareUpdater)
   - FastLED library
 
-      <!--
+<!--
 ### Installing
 
-- Clone this repository
-- Flash the .ino file to the arduino
+    - Clone this repository
+    - Flash the .ino file to the arduino
 
 ### Executing program
 
-- (How to run the program)
-- (Step-by-step bullets)
+    - (How to run the program)
+    - (Step-by-step bullets)
 
-    ```
-    code blocks for commands
+        ```
+        code blocks for commands
 
-    ```
+        ```
 
 ### Help
 
-- (Any advise for common problems or issues.)
+    - (Any advise for common problems or issues.)
 
-    ```
-    command to run if program contains helper info
+        ```
+        command to run if program contains helper info
 
-    ```
+        ```
 --> 
+
 # API Design
 ## CRUD
 - Create a new animation with POST
