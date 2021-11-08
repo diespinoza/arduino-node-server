@@ -28,6 +28,7 @@ Contrary to the name of the server, this project used the FastLED library instea
       2. Update to the latest version with [this](https://www.arduino.cc/en/Tutorial/WiFiNINAFirmwareUpdater)
   - FastLED library
 
+      <!--
 ### Installing
 
 - Clone this repository
@@ -51,8 +52,26 @@ Contrary to the name of the server, this project used the FastLED library instea
     command to run if program contains helper info
 
     ```
-
-# Design
+--> 
+# API Design
+## CRUD
+- Create a new animation with POST
+      - /api/v1/animations
+- Read
+    - Get the homepage
+      - /
+    - Get all the animations in the Database
+      - /api/v1/animations
+    - Get a single animation 
+      - /api/v1/animations//:id
+    - Get all the animations for a specific device
+      - /api/v1/animations/device/:id
+- Update
+    - Change the animation
+      - /api/v1/animations/:id
+- Delete
+    - Remove an animation
+      - /api/v1/animations/:id
 
 ## Mission Statement
 
@@ -138,25 +157,6 @@ Machine-to-Human Interaction
     - HTML, CSS, JS
 - Back-End
     - NodeJS and Express
-- API - CRUD
-    - Create
-        - Create a new animation
-          - /api/v1/animations
-    - Read
-        - Get the homepage
-          - /
-        - Get all the animations in the Database
-          - /api/v1/animations
-        - Get a single animation 
-          - /api/v1/animations//:id
-        - Get all the animations for a specific device
-          - /api/v1/animations/device/:id
-    - Update
-        - Change the animation
-          - /api/v1/animations/:id
-    - Delete
-        - Remove an animation
-          - /api/v1/animations/:id
 
 ### Plan
 
