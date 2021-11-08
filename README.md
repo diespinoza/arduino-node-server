@@ -55,24 +55,30 @@ Contrary to the name of the server, this project used the FastLED library instea
 --> 
 
 # API Design
-## CRUD
-- Create a new animation with POST
-      - /api/v1/animations
-- Read
-    - Get the homepage
-      - /
-    - Get all the animations in the Database
-      - /api/v1/animations
-    - Get a single animation 
-      - /api/v1/animations//:id
-    - Get all the animations for a specific device
-      - /api/v1/animations/device/:id
-- Update
-    - Change the animation
-      - /api/v1/animations/:id
-- Delete
-    - Remove an animation
-      - /api/v1/animations/:id
+
+## Create
+
+Create a new animation with POST. Use a JSON object with a name string and delay number.
+- path: /api/v1/animations
+
+### Read
+
+Get the homepage.
+- path:  /
+Get all the animations in the Database.
+- path: /api/v1/animations
+Get a single animation.
+- path: /api/v1/animations/:animationID
+
+### Update
+
+Change the animation. Use a JSON object with either a name or a delay.
+- path: /api/v1/animations/:animationID
+
+### Delete
+
+Remove an animation.
+- path: /api/v1/animations/:animationID
 
 ## Mission Statement
 
