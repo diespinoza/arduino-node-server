@@ -65,8 +65,10 @@ Create a new animation with POST. Use a JSON object with a name string and delay
 
 Get the homepage.
 - path:  `/`
+
 Get all the animations in the Database.
 - path: `/api/v1/animations`
+
 Get a single animation.
 - path: `api/v1/animations/:animationID`
 
