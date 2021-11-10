@@ -59,26 +59,26 @@ Contrary to the name of the server, this project used the FastLED library instea
 ## Create
 
 Create a new animation with POST. Use a JSON object with a name string and delay number.
-- path: /api/v1/animations
+- path: `/api/v1/animations`
 
 ### Read
 
 Get the homepage.
-- path:  /
+- path:  `/`
 Get all the animations in the Database.
-- path: /api/v1/animations
+- path: `/api/v1/animations`
 Get a single animation.
-- path: /api/v1/animations/:animationID
+- path: `api/v1/animations/:animationID`
 
 ### Update
 
 Change the animation. Use a JSON object with either a name or a delay.
-- path: /api/v1/animations/:animationID
+- path: `/api/v1/animations/:animationID`
 
 ### Delete
 
 Remove an animation.
-- path: /api/v1/animations/:animationID
+- path: `/api/v1/animations/:animationID`
 
 ## Mission Statement
 
@@ -86,27 +86,17 @@ This project aims to create a web application that a single Arduino device can c
 
 ## What is the problem?
 
-A way to control a string of Neopixels remotely from anywhere in the world using the internet and an arduino Wi-Fi capable arduino
+A way to control a string of Neopixels remotely from anywhere in the world using the internet and a Wi-Fi capable arduino
 
 ### Relevant Context
 
 - Convenient way to have Internet controlled RGB LED lights that you can control via a a web interface
-- University or highschool that courses teach Internet of Things
 - Commercial and Industrial needs for displaying LED signs and controlling lighting based on data
-- (Define circumstances. State the purpose. Define value of solution)
 
 ### Why this project?
 
 - Create my own IoT Dashboard to manage my home LED strings.
 - Create real application that microcontrollers can use
-
-## Customers & Stakeholders
-
-- Makers and tinkerer's
-- IoT people
-- Future employers
-
-### Customer & Design connection
 
 ### What challenges must be overcome
 
@@ -129,6 +119,7 @@ Machine-to-Human Interaction
 - Programming of the Arduino is to be done separately using the Arduino IDE
 - Humans can use the dashboard to set up new devices and connect them together using a simple API key.
 
+<!--
 ### What technologies and knowledge must be understood to solve the problem?
 
 - HTML. CSS. JS
@@ -139,15 +130,6 @@ Machine-to-Human Interaction
 - Databases
 - FastLED
 - WifiNina
-
-### Risks that could lead to failure
-
-- The server and arduino can't communicate
-- User doesn't know how to program an arduino
-
-### Ethical dilemmas
-
-- Data privacy and storage
 
 ### Desired Result
 
@@ -172,21 +154,14 @@ Machine-to-Human Interaction
 - Heavily document code to allow easy understanding and use
 - Push to git everyday
 
+-->
+
 ## Authors
 
 Diego Espinoza Rodriguez (diespinoza)
-
-## Version History
-
-- 0.0
-    - Project Creation
 
 ## License
 
 TBD, it's open source though.
 <!--This project is licensed under the [NAME HERE] License - see the [LICENSE.md](http://license.md/) file for details
 -->
-
-## Acknowledgments
-
-Inspiration, code snippets, etc.
