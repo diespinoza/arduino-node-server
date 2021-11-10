@@ -1,12 +1,12 @@
 <%- include('header') %>
-<h2>Control Neopixels Remotely!</h2>
-<h3>Select an animation</h3>
+<body>
+<section class="instructions">
+<h1>FastLED API</h1>
+<h2>Control RGB LEDs Remotely!</h2>
+</section>
 
-<!-- 
-changing this to make request from javascript 
-<form action="/api/v1/animations" method="POST" target="_self">
--->
 <form class="animation-form">
+<h3>Select an animation</h3>
   <select name="name" id="animselect" class="animation-select">
     <option value="blink">Blink</option>
     <option value="cylon">Cylon</option>
@@ -17,6 +17,7 @@ changing this to make request from javascript
   <button type="submit">Submit</button>
 </form>
 
+<section class="animations-list">
 <h3>Current Animations:</h3>
 <ul class="animations">
   <% for(let i = 0; i < info.length; i++){ %>
@@ -27,6 +28,17 @@ changing this to make request from javascript
     </li>
   <% } %>
 </ul>
+</section>
+
+<footer>
+  <h4>Links:</h4>
+  <ul>
+    <li>
+      <span>
+        <a href="https://github.com/diespinoza/arduino-node-server">Github</a>
+      </span>
+    </li>
+  </ul>
+</footer>
 
 <script type="text/javascript" src="js/main.js"></script>
-<%- include('footer') %>
