@@ -7,21 +7,23 @@
 
 <form class="animation-form">
 <h3>Select an animation</h3>
-  <select name="name" id="animselect" class="animation-select">
-    <option value="blink">Blink</option>
-    <option value="cylon">Cylon</option>
-    <option value="rainbow">Rainbow</option>
-  </select>
-  <label for="delay">Delay</label>
-  <input type="number" placeholder="(milliseconds)" name="delay" class = "animation-delay">
-  <button type="submit">Submit</button>
+  <div class="form-control">
+    <select name="name" id="animselect" class="animation-select">
+      <option value="blink">Blink</option>
+      <option value="cylon">Cylon</option>
+      <option value="rainbow">Rainbow</option>
+    </select>
+    <label for="delay">Delay</label>
+    <input type="number" placeholder="(milliseconds)" name="delay" class = "animation-delay">
+    <button type="submit">Submit</button>
+  </div>
 </form>
 
-<section class="animations-list">
+<section class="animations-container">
 <h3>Current Animations:</h3>
-<ul class="animations">
+<ul class="animations-list">
   <% for(let i = 0; i < info.length; i++){ %>
-    <li class="animation">
+    <li class="single-animation">
       <span><%= info[i].name %></span>
       <span><%= info[i].delay %></span>
       <button type="button" class="rm-animation" id="<%= info[i]._id %>">Remove</button>
