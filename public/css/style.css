@@ -1,5 +1,11 @@
+/* style.css */
+@import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
+
+
 /* Box Model Hack */
-* {
+*,
+::after,
+::before {
   box-sizing: border-box;
 }
 
@@ -23,7 +29,7 @@
 /*******************************************/
 
 body {
-
+  font-family: 'Jost', sans-serif;
 }
 
 
