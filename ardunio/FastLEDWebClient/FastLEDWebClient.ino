@@ -190,18 +190,24 @@ void loop() {
       // Serial.print(doc["animations"].as<const char*>());
       const char* animations_item_name;
       long long animations_item_delay;
-      
+      int rainCount = 0;
       
       for (JsonObject animations_item : doc["animations"].as<JsonArray>()) {
         animations_item_name = animations_item["name"]; // "rainbow", "blink", "rainbow", "rainbow",
         animations_item_delay = animations_item["delay"]; // 12345, 1111111111111111, 45554, 1, 222, 
-      // Serial.println("Printing animations one by one");
-      // Serial.print(animations_item_name);
+        Serial.print("Printing animations one by one: ");
+        Serial.println(animations_item_name);
       // Serial.print(" : ");
       // Serial.println(animations_item_delay);
         //const char* animations_item_name = animations_item["name"]; // "rainbow", "blink", "rainbow", "rainbow",
         //long long animations_item_delay = animations_item["delay"]; // 12345, 1111111111111111, 45554, 1, 222, 
+        if( strcmp(animations_item_name,"rainbow") == 0){
+          rainCount++;
+          Serial.println("Rainbow animation");
+        }
       }   
+      Serial.print("Total rainbow animations: ");
+      Serial.println(rainCount);
      
       gotJson = true;
     }
@@ -317,5 +323,4 @@ void blink(){
   fill_solid(leds, NUM_LEDS, CRGB(0, 0, 0));
   FastLED.show();    
   delay(300);
-
 }
