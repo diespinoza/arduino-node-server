@@ -125,7 +125,10 @@ typedef void (*SimplePatternList[])();
 SimplePatternList gPatterns = { rainbow, cylon, blink};
 uint8_t gCurrentPatternNumber = 0; // Index number of which pattern is current
 uint8_t gHue = 0; // rotating "base color" used by many of the patterns
-
+//Array to hold the animations in order but stored as numbers.
+//Var to keep track of the number of animations. Max is 30.
+uint8_t animationsCount = 0;
+uint8_t animationsList[30];
 
 /*************** The main LOOP ***************/
 void loop() {
@@ -188,17 +191,16 @@ void loop() {
       serializeJsonPretty(doc, Serial);
       
       // Serial.print(doc["animations"].as<const char*>());
-      const char* animations_item_name;
-      long long animations_item_delay;
-      //Array to hold the animations in order but stored as numbers.
-      //Var to keep track of the number of animations. Max is 30.
-      uint8_t animationsCount = 0;
-      uint8_t animationsList[30];
+     
+   
       Serial.print(sizeof(animationsList)/sizeof(uint8_t));
       
       for (JsonObject animations_item : doc["animations"].as<JsonArray>()) {
+        const char* animations_item_name;
+        long long animations_item_delay;
         if(animationsCount >= 30){
           Serial.print("too many animations");
+          animationsCount--;
           break;
         }
         animations_item_name = animations_item["name"]; // "rainbow", "blink", "rainbow", "rainbow",
