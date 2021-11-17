@@ -190,9 +190,17 @@ void loop() {
       // Serial.print(doc["animations"].as<const char*>());
       const char* animations_item_name;
       long long animations_item_delay;
-      int rainCount = 0;
+      //Array to hold the animations in order but stored as numbers.
+      //Var to keep track of the number of animations. Max is 30.
+      uint8_t animationsCount = 0;
+      uint8_t animationsList[30];
+      Serial.print(sizeof(animationsList)/sizeof(uint8_t));
       
       for (JsonObject animations_item : doc["animations"].as<JsonArray>()) {
+        if(animationsCount >= 30){
+          Serial.print("too many animations");
+          break;
+        }
         animations_item_name = animations_item["name"]; // "rainbow", "blink", "rainbow", "rainbow",
         animations_item_delay = animations_item["delay"]; // 12345, 1111111111111111, 45554, 1, 222, 
         Serial.print("Printing animations one by one: ");
@@ -201,13 +209,30 @@ void loop() {
       // Serial.println(animations_item_delay);
         //const char* animations_item_name = animations_item["name"]; // "rainbow", "blink", "rainbow", "rainbow",
         //long long animations_item_delay = animations_item["delay"]; // 12345, 1111111111111111, 45554, 1, 222, 
-        if( strcmp(animations_item_name,"rainbow") == 0){
-          rainCount++;
+        if(strcmp(animations_item_name,"rainbow") == 0){
+          animationsList[animationsCount++] = 0;
           Serial.println("Rainbow animation");
         }
+        else if(strcmp(animations_item_name,"cylon") == 0){
+          animationsList[animationsCount++] = 1;
+          Serial.println("cylon animation");
+        }
+        else if(strcmp(animations_item_name,"blink") == 0){
+          animationsList[animationsCount++] = 2;
+          Serial.println("blink animation");
+        }
+        
       }   
-      Serial.print("Total rainbow animations: ");
-      Serial.println(rainCount);
+      //printing the animations converted
+      Serial.print("Total animations: ");
+      Serial.println(animationsCount);
+      Serial.print("Animations array: ");
+      for(uint8_t i=0; i<animationsCount; i++){
+        Serial.print(animationsList[i]);
+        Serial.print(" , ");
+      }
+      Serial.println("");
+
      
       gotJson = true;
     }
