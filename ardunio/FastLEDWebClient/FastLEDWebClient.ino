@@ -200,7 +200,7 @@ void loop() {
         long long animations_item_delay;
         if(animationsCount >= 30){
           Serial.print("too many animations");
-          animationsCount--;
+          //animationsCount--;
           break;
         }
         animations_item_name = animations_item["name"]; // "rainbow", "blink", "rainbow", "rainbow",
@@ -256,7 +256,7 @@ void loop() {
     // Control the LEDs forever
     while (true){
       // Call the current pattern function once, updating the 'leds' array
-      gPatterns[gCurrentPatternNumber]();
+      gPatterns[animationsList[gCurrentPatternNumber]]();
 
       // send the 'leds' array out to the actual LED strip
       FastLED.show();  
@@ -265,7 +265,7 @@ void loop() {
 
       // do some periodic updates
       EVERY_N_MILLISECONDS( 20 ) { gHue++; } // slowly cycle the "base color" through the rainbow
-      EVERY_N_SECONDS( 10 ) { nextPattern(); } // change patterns periodically
+      EVERY_N_SECONDS( 5 ) { nextPattern(); } // change patterns periodically
 
     }
   }
@@ -294,7 +294,11 @@ void printWifiStatus() {
 
 void nextPattern(){
   // add one to the current pattern number, and wrap around at the end
-  gCurrentPatternNumber = (gCurrentPatternNumber + 1) % ARRAY_SIZE( gPatterns);
+  //gCurrentPatternNumber = (gCurrentPatternNumber + 1) % ARRAY_SIZE( gPatterns);
+  //iterate through the animationslist one by one and wrap at the end
+  
+  gCurrentPatternNumber = (gCurrentPatternNumber + 1) % animationsCount;
+  
 }
 
 void fadeall(){
