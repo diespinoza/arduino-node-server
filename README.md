@@ -84,7 +84,7 @@ Remove an animation.
 
 ## Mission Statement
 
-This project aims to create a web application that a single Arduino device can communicate with. It will allow the arduinos to retrieve information about RGB led so it can be executed. It needs to be accessible from any web browser or application in the world.
+This project aims to create a web application that any number of Arduinos device can communicate with. It will allow the arduinos to retrieve information using a CRUD API in order to control RGB leds. The application needs to be accessible from any web browser or application in the world.
 
 ## What is the problem?
 
