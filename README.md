@@ -94,6 +94,7 @@ A way to control a string of Neopixels remotely from anywhere in the world using
 
 - Convenient way to have Internet controlled RGB LED lights that you can control via a a web interface
 - Commercial and Industrial needs for displaying LED signs and controlling lighting based on data
+- REST API that is versatile. It can be used by any app or device capable of receiving JSON.
 
 ### Why this project?
 
