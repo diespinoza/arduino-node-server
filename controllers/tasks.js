@@ -80,6 +80,9 @@ const deleteAnimation = async (req,res) => {
 
 //TODO not sure if needed yet
 const getAllDeviceAnimations = async (req,res) => {
+  //this will take a device ID
+  //Device ID needs to be given based on a different path
+  //The devices will also be stored in a different collection
   res.send('get all animations for a device');
 }
 
