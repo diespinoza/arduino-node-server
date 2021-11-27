@@ -21,12 +21,13 @@ Contrary to the name of the server, this project used the FastLED library instea
 ### Materials & Dependencies
 
 - Arduino IDE (latest version)
-- Arduino Uno WiFi Rev 2 (only tested on this device for now)
+- Arduino Uno WiFi Rev 2
   - Wifi NiNA Library
   - Updated firmware to the latest version
       1. Check the current version with [this](https://www.arduino.cc/en/Tutorial/CheckWiFi101FirmwareVersion)
       2. Update to the latest version with [this](https://www.arduino.cc/en/Tutorial/WiFiNINAFirmwareUpdater)
   - FastLED library
+  - ArduinoJSON library
 
 <!--
 ### Installing
@@ -108,11 +109,11 @@ Machine-to-Human Interaction
 - Arduinos can interact with and securely connect to the server to download data
 - Dashboard that humans can use to view control the LED and preview them
 
-    Human-to-Machine Interaction
+Human-to-Machine Interaction
 
 - Humans can a dashboard use to send data and commands to arduino
 
-    Machine-to-Machine Interaction
+Machine-to-Machine Interaction
 
 - Arduinos can send data and commands to each other.
 
