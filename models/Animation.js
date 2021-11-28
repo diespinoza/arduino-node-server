@@ -11,7 +11,9 @@ const AnimationSchema = new mongoose.Schema({
   delay: {
     type: Number,
     required: [true, 'must provide delay'],
-    default: 10
+    default: 10,
+    min: 0,
+    max: 9223372036854775807 //not working properly
   },
 });
 
