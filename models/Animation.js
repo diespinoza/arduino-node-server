@@ -7,6 +7,8 @@ const AnimationSchema = new mongoose.Schema({
     required: [true, 'must provide name'],
     trim:true,
     maxlength: [20, 'name cannot be more than 20 characters'],
+    //add a way to check against a known list of animations
+    //
   },
   delay: {
     type: Number,
